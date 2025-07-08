@@ -1,8 +1,5 @@
 from selenium import webdriver
 import unittest
-from base.base_test import BaseTest
-from selenium.webdriver.common.by import By
-import time
 
 class BaseTest(unittest.TestCase):
     def setUp(self):
@@ -10,6 +7,13 @@ class BaseTest(unittest.TestCase):
         self.driver = webdriver.Chrome(options=options)
         self.driver.maximize_window()
         self.driver.implicitly_wait(10)
+    def tearDown(self):
+        self.driver.quit()
+
+from base.base_test import BaseTest
+from selenium.webdriver.common.by import By
+import time
+class TestDashboard(BaseTest):
     def test_login_and_dashboard_chart(self):
         self.driver.get("https://ua.segwise.ai/qa_assignment")
         self.driver.find_element(By.NAME, "email").send_keys("qa@segwise.ai")
