@@ -1,0 +1,14 @@
+from selenium import webdriver
+import unittest
+
+class BaseTest(unittest.TestCase):
+    def setUp(self):
+        options = webdriver.ChromeOptions()
+        self.driver = webdriver.Chrome(options=options)
+        self.driver.maximize_window()
+        self.driver.implicitly_wait(10)
+
+    def tearDown(self):
+        self.driver.quit()
+
+
