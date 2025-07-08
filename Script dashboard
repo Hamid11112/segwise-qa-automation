@@ -1,0 +1,16 @@
+from base.base_test import BaseTest
+from selenium.webdriver.common.by import By
+import time
+
+class TestDashboard(BaseTest):
+    def test_login_and_dashboard_chart(self):
+        self.driver.get("https://ua.segwise.ai/qa_assignment")
+        self.driver.find_element(By.NAME, "email").send_keys("qa@segwise.ai")
+        self.driver.find_element(By.NAME, "password").send_keys("segwise_test")
+        self.driver.find_element(By.TAG_NAME, "button").click()
+        time.sleep(5)
+        try:
+            chart = self.driver.find_element(By.CLASS_NAME, "chart-container")
+            self.assertIsNotNone(chart)
+        except Exception:
+            self.fail("Dashboard chart not found")
